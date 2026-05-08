@@ -28,6 +28,21 @@ const slides = [
   },
 ]
 
+const bgPhotos = Array.from({ length: 11 }, (_, i) => `/p${i + 1}.jpeg`)
+
+// Tile the 11 images repeatedly to fill ~80 cells
+const gridTiles = Array.from({ length: 88 }, (_, i) => bgPhotos[i % bgPhotos.length])
+
+function PhotoGrid() {
+  return (
+    <div className="photo-grid-bg">
+      {gridTiles.map((src, i) => (
+        <img key={i} src={src} alt="" className="grid-tile" />
+      ))}
+    </div>
+  )
+}
+
 const heartPositions = Array.from({ length: 12 }, (_, i) => ({
   id: i,
   left: `${Math.random() * 100}%`,
@@ -106,6 +121,7 @@ function LetterPage({ onBack }) {
 
   return (
     <div className="letter-page">
+      <PhotoGrid />
       <HeartsBackground />
       {exploding && <EmojiExplosion onDone={() => setExploding(false)} />}
       <div className="letter-card">
@@ -172,6 +188,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <PhotoGrid />
       <HeartsBackground />
 
       <div className="header">

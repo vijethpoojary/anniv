@@ -430,3 +430,29 @@
   0%, 100% { box-shadow: 0 4px 24px rgba(255,107,157,0.5); }
   50%       { box-shadow: 0 4px 40px rgba(255,107,157,0.9); }
 }
+
+/* ---- PHOTO GRID BACKGROUND ---- */
+.photo-grid-bg {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 3px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.40;
+}
+
+.grid-tile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .photo-grid-bg {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
