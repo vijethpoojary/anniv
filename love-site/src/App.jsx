@@ -57,39 +57,87 @@ function HeartsBackground() {
   )
 }
 
+const EMOJIS = ['❤️', '😘', '🫂', '💋', '🥰', '💕', '💖', '😍', '🫀', '💝']
+
+function EmojiExplosion({ onDone }) {
+  const [particles] = useState(() =>
+    Array.from({ length: 500 }, (_, i) => ({
+      id: i,
+      emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
+      left: `${Math.random() * 100}vw`,
+      delay: `${Math.random() * 1.5}s`,
+      duration: `${2 + Math.random() * 3}s`,
+      size: `${1.2 + Math.random() * 2}rem`,
+      type: Math.random() < 0.33 ? 'fall' : Math.random() < 0.5 ? 'rise' : 'pop',
+      startY: `${20 + Math.random() * 60}vh`,
+      drift: `${(Math.random() - 0.5) * 200}px`,
+    }))
+  )
+
+  useEffect(() => {
+    const t = setTimeout(onDone, 5000)
+    return () => clearTimeout(t)
+  }, [onDone])
+
+  return (
+    <div className="emoji-explosion">
+      {particles.map((p) => (
+        <span
+          key={p.id}
+          className={`emoji-particle emoji-${p.type}`}
+          style={{
+            left: p.left,
+            fontSize: p.size,
+            animationDelay: p.delay,
+            animationDuration: p.duration,
+            '--drift': p.drift,
+            '--startY': p.startY,
+          }}
+        >
+          {p.emoji}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 function LetterPage({ onBack }) {
+  const [exploding, setExploding] = useState(false)
+
   return (
     <div className="letter-page">
       <HeartsBackground />
+      {exploding && <EmojiExplosion onDone={() => setExploding(false)} />}
       <div className="letter-card">
-        <div className="letter-icon">💌</div>
+        <div className="letter-icon">🫂🫂🫂❤️❤️❤️</div>
         <h2>Appu A Letter For You</h2>
         <div className="letter-divider" />
         <div className="letter-body">
           <p>
-            My love, from the very first moment I saw you, something inside me
-            knew — you were the one I had been waiting for all along.
+           Happy Anniversary enna mokeda muddu kinni bodedig🫂🫂🫂❤️❤️❤️😘😘😘😘🫀🫀🫀..
           </p>
           <p>
-            Every laugh we share, every quiet moment, every glance across the
-            room — they all remind me how lucky I am to have you in my life.
+           E day dani enna lifegonji bangar tiknd🫂🫂🫂, eer enna kinni jojja enna lifeg bathina dina😘😘😘
+           Nama masth fights, misunderstanding etc etc sumar face malda , But in every situation, we never gave up on each other.
+           After every fight, we understood each other more deeply, and our love grew stronger and stronger.
+           This shows how much we truly love, care for, and respect each other.... 
           </p>
           <p>
-            You make the ordinary feel magical. You turn simple days into
-            memories I will carry forever in my heart.
+           Iam waiting for the day, Morning lakkd kann bulanaga aa munku tojodu pand😁😁😁
+           Lakkle yavu upadra malthinind eer panodu 😁😁😁
           </p>
           <p>
-            I promise to love you on your best days and your hardest ones. To
-            stand beside you, to hold your hand, and to never stop choosing you.
-          </p>
-          <p>
-            You are my favorite person, my greatest adventure, and my deepest
-            love. Always and forever.
+           I love you cho much much much much much much much much much much much much much much much much
+           much much much much much much much much much much much much much much much much Kinni muddu apuchi bangaru jojja bodedi
+           🫂🫂🫂❤️❤️❤️😘😘😘😘🫀🫀🫀🫂🫂🫂❤️❤️❤️😘😘😘😘🫀🫀🫀
           </p>
         </div>
         <div className="letter-sign">— Yours, always ♥</div>
+        <button className="btn-clickme" onClick={() => setExploding(true)}>
+          💌 Click Me appu dethonle 😁😁😁💌
+        </button>
         <button className="btn-back" onClick={onBack}>
-          ← Back to our memories
+          ← Back
         </button>
       </div>
     </div>
@@ -127,7 +175,7 @@ export default function App() {
       <HeartsBackground />
 
       <div className="header">
-        <h1>♥ Namma Kinya story ♥</h1>
+        <h2>♥ Namma Kinya story ♥</h2>
         <p className="subtitle">moments that matter</p>
       </div>
 
