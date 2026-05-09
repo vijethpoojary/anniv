@@ -26,6 +26,10 @@ const slides = [
     img: '/pic5.jpg',
     caption: 'We are not just a couple, we are best friends — one soul living in two bodies. No matter what life brings, we stand together, understand each other, heal each other, and love each other endlessly.',
   },
+  {
+    img: '/pic5.jpg',
+    caption: 'We are not just a couple, we are best friends — one soul living in two bodies. No matter what life brings, we stand together, understand each other, heal each other, and love each other endlessly.',
+  },
 ]
 
 const bgPhotos = Array.from({ length: 11 }, (_, i) => `/p${i + 1}.jpeg`)
